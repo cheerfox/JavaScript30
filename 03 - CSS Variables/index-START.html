@@ -25,6 +25,11 @@
     /*
       misc styles, nothing to do with CSS variables
     */
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
 
     body {
       text-align: center;
@@ -42,9 +47,35 @@
     input {
       width: 100px;
     }
+
+    img {
+      background: var(--base);
+      padding: var(--spacing);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
   </style>
 
   <script>
+    /*
+     * 可以學習 this 的用法
+     * this.name / this.value
+     */
+    function changeHandler (e) {
+      console.log(e.target); // you can use this in this case
+      console.log(this);
+      const suffix = this.dataset.sizing || '';
+
+      // documentElement returns root DOM
+      document.documentElement.style.setProperty(`--${this.name}`, `${this.value}${suffix}`);
+      console.log(suffix);
+    } 
+    const inputs = document.querySelectorAll('.controls input');
+    inputs.forEach(input => input.addEventListener('change', changeHandler));
+    inputs.forEach(input => input.addEventListener('mousemove', changeHandler));
   </script>
 
 </body>
