@@ -7,6 +7,21 @@
 </head>
 <body>
 <script>
+  let pressedKeys = [];
+  let secretCode = 'wesbos';
+
+  window.addEventListener('keyup', (e) => {
+    console.log(e.key);
+    pressedKeys.push(e.key);
+    pressedKeys = pressedKeys.slice(-secretCode.length);
+    console.log(pressedKeys);
+
+    if (pressedKeys.join('').includes(secretCode)) {
+      console.log('bingo');
+      cornify_add();
+    }
+  })
+
 </script>
 </body>
 </html>
